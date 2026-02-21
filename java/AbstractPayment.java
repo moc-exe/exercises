@@ -1,11 +1,3 @@
-/*
-
-    DML -> for instance methods the type of the object not of the variable determines the method invoked.
-
-    Abstract class 
-
-*/
-
 package java;
 
 import java.util.UUID;
