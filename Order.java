@@ -1,4 +1,7 @@
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Order {
     // immutable
@@ -35,7 +38,38 @@ public class Order {
 
     @Override
     public int hashCode(){
-        return Objects.hash(orderId); 
+        return Objects.hash(orderId);
     }
-        
+
+    // public static double totalPaidRevenue(List<Order> orders) signature as per requirements 
+    public static double totalPaidRevenueImperative(List<Order> orders){
+        double total = 0;
+        for (Order o : orders) {
+            if(Objects.equals(o.status, "PAID")) total+=o.getAmount();
+        }
+        return total;
+    }
+
+    public static double streamTotalPaidRevenue(List<Order> orders){
+
+        return  orders.stream()
+                .filter(order -> order.isPaid())
+                .mapToDouble(order -> order.amount)
+                .sum();
+    }
+
+    public static Map<String, Double> groupTotalRevenueByCustomer(List<Order> orders){
+
+        return orders.stream()
+            .filter(order -> order.isPaid())
+            .collect(Collectors.toMap(
+                order -> order.customerId,
+                order -> order.amount,
+                (existing, replacement) -> existing + replacement
+            ));
+    }
+    
+    private boolean isPaid(){ return this.status.equals("PAID");}
+
+
 }
