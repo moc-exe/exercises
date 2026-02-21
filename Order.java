@@ -1,6 +1,8 @@
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Order {
@@ -68,8 +70,30 @@ public class Order {
                 (existing, replacement) -> existing + replacement
             ));
     }
-    
-    private boolean isPaid(){ return this.status.equals("PAID");}
 
+    public static Optional<String> getCustomerWithTopRevenue(List<Order> orders){
+
+        return orders.stream()
+                .filter(order -> order.isPaid())
+                .max(new Comparator<Order>() {
+                    @Override
+                    public int compare(Order o1, Order o2){ return Double.compare(o1.amount, o2.amount);}
+                })
+                .map(order -> order.customerId);
+                
+    }
+
+    public static Map<String, Long> countOrdersPerStatus(List<Order> orders){
+
+        return orders.stream()
+                .filter(order -> order.isPaid())
+                .collect(Collectors.toMap(
+                    order -> order.status,
+                    order -> 1L,
+                    (existing, replacement) -> existing + 1
+                ));
+    }
+
+    private boolean isPaid(){ return this.status.equals("PAID");}
 
 }
