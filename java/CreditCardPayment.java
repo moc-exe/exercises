@@ -1,5 +1,3 @@
-package java;
-
 public class CreditCardPayment extends AbstractPayment{
 
     private String cardNumber;

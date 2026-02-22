@@ -1,4 +1,3 @@
-package java;
 import java.util.LinkedHashMap;
 
 public class SimpleCache<K, V>{

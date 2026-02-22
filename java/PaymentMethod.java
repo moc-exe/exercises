@@ -1,4 +1,3 @@
-package java;
 public interface PaymentMethod {
 
     boolean authorize(double amount);

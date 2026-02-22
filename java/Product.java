@@ -1,4 +1,3 @@
-package java;
 import java.util.Objects;
 import java.util.UUID;
 

@@ -1,5 +1,3 @@
-package java;
-
 import java.util.UUID;
 
 public abstract class AbstractPayment implements PaymentMethod {

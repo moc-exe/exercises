@@ -1,5 +1,3 @@
-package java;
-
 public class PaypalPayment extends AbstractPayment{
 
     private String email;
